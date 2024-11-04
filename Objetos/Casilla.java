@@ -4,6 +4,8 @@
  */
 package Objetos;
 
+import static Utilizables.Colores.Rosa;
+
 /**
  *
  * @author thyfa
