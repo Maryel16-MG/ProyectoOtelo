@@ -4,6 +4,8 @@
  */
 package Objetos;
 
+import Utilizables.Colores;
+
 /**
  *
  * @author thyfa

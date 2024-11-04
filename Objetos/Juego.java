@@ -4,8 +4,12 @@
  */
 package Objetos;
 
+import Utilizables.Colores;
+import static Utilizables.Colores.Blanco;
 import static Utilizables.Colores.Negro;
 import static Utilizables.Colores.Rojo;
+import static Utilizables.Colores.Rosa;
+import Utilizables.Hilo;
 import javax.swing.JButton;
 
 /**
@@ -89,5 +93,142 @@ public class Juego {
         }
         RetirarBlancosPorCambioDeTurno();
     }
+     public void ColocarFicha(int fila, int columna, Colores color) {
+        if (this.ObtenerJugadorActual().getColorDeFicha() == Rojo) {
+            ListaBotones[fila][columna].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rojo0" + ".png")));
 
+        } else if (this.ObtenerJugadorActual().getColorDeFicha() == Negro) {
+            ListaBotones[fila][columna].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/negro0" + ".png")));
+
+        }
+
+        this.Tablero.ObtenerCasiila(fila, columna).setEstado(true);
+        this.Tablero.ObtenerCasiila(fila, columna).getFicha().setColor(color);
+
+        ValidarCasilla(fila, columna, 1);
+
+    }
+  public Jugador ObtenerJugadorActual() {
+        if (TurnoActual) {
+            return this.Jugador2;
+        } else {
+            return this.Jugador1;
+        }
+    }
+
+    public void AgregarListaBotones(JButton[][] ListaBotones) {
+        this.ListaBotones = ListaBotones;
+    }
+
+    public boolean ValidarCasilla(int FilaOriginal, int ColumnaOriginal, int Enviado) {
+        if (this.Tablero.ObtenerCasiila(FilaOriginal, ColumnaOriginal).getFicha().getColor()
+                == Rosa
+                || this.Tablero.ObtenerCasiila(FilaOriginal, ColumnaOriginal).getFicha().getColor()
+                == Blanco) {
+            return true;
+        }
+
+        if (Enviado == 0) {
+            if (this.Tablero.ObtenerCasiila(FilaOriginal, ColumnaOriginal).getFicha().getColor()
+                    == ObtenerJugadorActual().getColorDeFicha()) {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            if (ValidarPosicionCasilla(FilaOriginal, i)) {
+                continue;
+            }
+            for (int j = 0; j < 3; j++) {
+                FilaOriginal = FilaOriginal;
+                if (ValidarPosicionCasilla(ColumnaOriginal, j)) {
+                    continue;
+                }
+                if (i == 1 && j == 1) {
+                    continue;
+                }
+
+                if (Enviado == 0
+                        && this.Tablero.ObtenerCasiila(DevolverPosicion(i, FilaOriginal), DevolverPosicion(j, ColumnaOriginal)).isEstado()
+                        && this.Tablero.ObtenerCasiila(DevolverPosicion(i, FilaOriginal), DevolverPosicion(j, ColumnaOriginal)).getFicha().getColor()
+                        == ObtenerJugadorActual().getColorDeFicha()) {
+                    this.ComenzarReconocimiento(Enviado, ((3 - 1) - i), ((3 - 1) - j), FilaOriginal, ColumnaOriginal);
+                }
+
+                if (Enviado == 1
+                        && this.Tablero.ObtenerCasiila(DevolverPosicion(i, FilaOriginal), DevolverPosicion(j, ColumnaOriginal)).isEstado()
+                        && this.Tablero.ObtenerCasiila(DevolverPosicion(i, FilaOriginal), DevolverPosicion(j, ColumnaOriginal)).getFicha().getColor()
+                        != ObtenerJugadorActual().getColorDeFicha()) {
+                    this.ComenzarReconocimiento(Enviado, ((i - 1) + 1), ((j - 1) + 1), FilaOriginal, ColumnaOriginal);
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean ValidarLimites(int NuevaPosicionFila, int NuevaPosicionColumna) {
+        if (NuevaPosicionFila < 0 || NuevaPosicionFila > 11) {
+            return true;
+        }
+        if (NuevaPosicionColumna < 0 || NuevaPosicionColumna > 11) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean ComenzarReconocimiento(int Enviado, int IndicadorFila, int IndicadorColumna, int Fila, int Columna) {
+
+        int NuevaPosicionFila = DevolverPosicion(IndicadorFila, Fila);
+        int NuevaPosicionColumna = DevolverPosicion(IndicadorColumna, Columna);
+
+
+        if (ValidarLimites(NuevaPosicionFila, NuevaPosicionColumna)) {
+            return false;
+        }
+
+        if (Enviado == 0 
+                && this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).getFicha().getColor() == ObtenerJugadorActual().getColorDeFicha()) {
+            return true;
+        }
+
+        if (Enviado == 0 && this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).isEstado()) {
+            ComenzarReconocimiento(Enviado, IndicadorFila, IndicadorColumna, NuevaPosicionFila, NuevaPosicionColumna);
+            return true;
+        }
+
+        if (Enviado == 0 && !this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).isEstado()) {
+            this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).getFicha().setColor(Blanco);
+            return false;
+        }
+
+        if (Enviado == 1
+                && !this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).isEstado()) {
+            return false;
+        }
+
+        if (Enviado == 1
+                && this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).isEstado()
+                && this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).getFicha().getColor() == ObtenerJugadorActual().getColorDeFicha()) {
+            return true;
+        }
+
+        if (Enviado == 1
+                && this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).isEstado()) {
+            if (ComenzarReconocimiento(Enviado, IndicadorFila, IndicadorColumna, NuevaPosicionFila, NuevaPosicionColumna)) {
+                Hilo Hilo = new Hilo();
+
+                this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).getFicha().setColor(ObtenerJugadorActual().getColorDeFicha());
+                Hilo.setBtn(this.ListaBotones[NuevaPosicionFila][NuevaPosicionColumna]);
+                Hilo.setColor(ObtenerJugadorActual().getColorDeFicha());
+                Hilo.start();
+                return true;
+            } else {
+                this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).getFicha().setColor(this.InvertirColores(ObtenerJugadorActual().getColorDeFicha()));
+                return false;
+            }
+
+        }
+        return true;
+    }
 }
