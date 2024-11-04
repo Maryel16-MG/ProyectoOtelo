@@ -231,4 +231,115 @@ public class Juego {
         }
         return true;
     }
+public Colores InvertirColores(Colores color) {
+        if (color == Negro) {
+            return Rojo;
+        } else if (color == Rojo) {
+            return Negro;
+        } else {
+            return Rosa;
+        }
+    }
+
+    public int DevolverPosicion(int Indicador, int PosicionOriginal) {
+        int x = ((PosicionOriginal - 1) + Indicador);
+        return x;
+
+    }
+
+    public boolean ValidarPosicionCasilla(int Posicion, int Indicador) {
+        if (Indicador == 1) {
+            return false;
+        }
+
+        if (Indicador == 0 && (Posicion - 1) + Indicador < 0) {
+            return true;
+        }
+
+        if (Indicador == 2 && (Posicion + 1) + Indicador > 11) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void ConteoDeFichasJugadores() {
+        int Negras = 0;
+        int Rojas = 0;
+        for (int i = 0; i < 11; i++) {
+            for (int j = 0; j < 11; j++) {
+                if (this.Tablero.ObtenerCasiila(i, j).getFicha().getColor() == Negro) {
+                    Negras++;
+                } else if (this.Tablero.ObtenerCasiila(i, j).getFicha().getColor() == Rojo) {
+                    Rojas++;
+                }
+            }
+        }
+        this.Jugador1.setFichasObtenidas(Negras);
+        this.Jugador2.setFichasObtenidas(Rojas);
+    }
+
+    public void Mostrar() {
+        System.out.println("[ Z][ 0][ 1][ 2][ 3][ 4][ 5][ 6][ 7][ 8][ 9][10][11]");
+        for (int i = 0; i < 12; i++) {
+            if (i < 10) {
+                System.out.print("[ " + i + "]");
+
+            } else {
+                System.out.print("[" + i + "]");
+
+            }
+            for (int j = 0; j < 12; j++) {
+                if (this.Tablero.ObtenerCasiila(i, j).getFicha().getColor() == Rosa) {
+                    System.out.print("[ X]");
+                } else if (this.Tablero.ObtenerCasiila(i, j).getFicha().getColor() == Negro) {
+                    System.out.print("[ N]");
+                } else if (this.Tablero.ObtenerCasiila(i, j).getFicha().getColor() == Blanco) {
+                    System.out.print("[ B]");
+                } else {
+                    System.out.print("[ R]");
+                }
+            }
+            System.out.println("");
+        }
+
+    }
+
+    public void MostrarPosiblesJugadas() {
+        RetirarBlancosPorCambioDeTurno();
+
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                this.ValidarCasilla(i, j, 0);
+            }
+        }
+    }
+
+    public void RetirarBlancosPorCambioDeTurno() {
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                if (this.Tablero.ObtenerCasiila(i, j).getFicha().getColor() == Rosa) {
+                } else if (this.Tablero.ObtenerCasiila(i, j).getFicha().getColor() == Negro) {
+                } else if (this.Tablero.ObtenerCasiila(i, j).getFicha().getColor() == Blanco) {
+                    this.Tablero.ObtenerCasiila(i, j).getFicha().setColor(Rosa);
+                } else {
+                }
+            }
+        }
+    }
+
+    public void AgregarTextButton(int Fila, int Columna, JButton btn) {
+        btn.setSelected(false);
+        if (this.Tablero.ObtenerCasiila(Fila, Columna).getFicha().getColor() == Rosa) {
+            btn.setIcon(null);
+        } else if (this.Tablero.ObtenerCasiila(Fila, Columna).getFicha().getColor() == Negro) {
+            btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/negro0" + ".png")));
+        } else if (this.Tablero.ObtenerCasiila(Fila, Columna).getFicha().getColor() == Blanco) {
+            btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Libre" + ".png")));
+            btn.setSelected(true);
+        } else {
+            btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rojo0" + ".png")));
+        }
+    }
+
 }
