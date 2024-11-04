@@ -8,6 +8,6 @@ package Utilizables;
  *
  * @author user
  */
-public class Colores {
-    
+public enum Colores {
+     Negro, Rojo, Rosa, Blanco;
 }
