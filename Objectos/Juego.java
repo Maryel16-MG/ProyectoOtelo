@@ -4,8 +4,6 @@
  */
 package Objectos;
 
-import Objetos.Jugador;
-import Objetos.Tablero;
 import Utilizables.Colores;
 import static Utilizables.Colores.Blanco;
 import static Utilizables.Colores.Negro;
