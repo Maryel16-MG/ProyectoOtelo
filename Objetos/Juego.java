@@ -17,7 +17,6 @@ import javax.swing.JButton;
  * @author thyfa
  */
 public class Juego {
-    
     private JButton[][] ListaBotones = new JButton[12][12];
     private Tablero Tablero;
     private Jugador Jugador1;
@@ -93,7 +92,8 @@ public class Juego {
         }
         RetirarBlancosPorCambioDeTurno();
     }
-     public void ColocarFicha(int fila, int columna, Colores color) {
+
+    public void ColocarFicha(int fila, int columna, Colores color) {
         if (this.ObtenerJugadorActual().getColorDeFicha() == Rojo) {
             ListaBotones[fila][columna].setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rojo0" + ".png")));
 
@@ -108,7 +108,8 @@ public class Juego {
         ValidarCasilla(fila, columna, 1);
 
     }
-  public Jugador ObtenerJugadorActual() {
+
+    public Jugador ObtenerJugadorActual() {
         if (TurnoActual) {
             return this.Jugador2;
         } else {
@@ -231,7 +232,8 @@ public class Juego {
         }
         return true;
     }
-public Colores InvertirColores(Colores color) {
+
+    public Colores InvertirColores(Colores color) {
         if (color == Negro) {
             return Rojo;
         } else if (color == Rojo) {
@@ -341,5 +343,6 @@ public Colores InvertirColores(Colores color) {
             btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rojo0" + ".png")));
         }
     }
+
 
 }
