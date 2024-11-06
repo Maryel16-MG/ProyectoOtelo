@@ -66,18 +66,10 @@ public class Hilo implements Runnable {
         animationBox();
     }
 
-<<<<<<< HEAD
-   
+
     public void startAnimation() {
         Thread thread = new Thread(this); 
         thread.start(); 
     }
-=======
-    public void start() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
->>>>>>> 4c44430 (Se hacen correciones)
 }
 
