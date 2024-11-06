@@ -525,6 +525,11 @@ public class JframeTablero extends javax.swing.JFrame {
         btn00.setBackground(new java.awt.Color(255, 0, 0));
         btn00.setContentAreaFilled(false);
         btn00.setDefaultCapable(false);
+        btn00.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn00ActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn00, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 13, 50, 38));
 
         btn1109.setContentAreaFilled(false);
@@ -994,6 +999,10 @@ public class JframeTablero extends javax.swing.JFrame {
     private void btn90ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn90ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn90ActionPerformed
+
+    private void btn00ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn00ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn00ActionPerformed
 
     /**
      * @param args the command line arguments
