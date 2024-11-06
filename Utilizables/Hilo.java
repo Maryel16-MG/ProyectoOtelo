@@ -12,8 +12,8 @@ import javax.swing.JButton;
  *
  * @author user
  */
-public class Hilo {
-       private JButton btn;
+public class Hilo implements Runnable {
+    private JButton btn;
     private Colores color;
 
     public Colores getColor() {
@@ -32,6 +32,7 @@ public class Hilo {
         this.btn = btn;
     }
 
+    // Método para animar el botón
     public void animationBox() {
         for (int i = 0; i < 4; i++) {
             if (this.getColor() == Rojo) {
@@ -43,24 +44,32 @@ public class Hilo {
             btn.setContentAreaFilled(false);
 
             try {
-                Thread.sleep(100);
+                Thread.sleep(100); 
             } catch (InterruptedException ex) {
-
+                Thread.currentThread().interrupt(); 
+                System.out.println("El hilo fue interrumpido");
+                return;
             }
         }
 
-        if (this.getColor() != Rojo) {
-            btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/negro0" + ".png")));
-
-        }
-        if (this.getColor() != Negro) {
-            btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rojo0" + ".png")));
+        // Icono final después de la animación
+        if (this.getColor() == Rojo) {
+            btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rojo0.png")));
+        } else if (this.getColor() == Negro) {
+            btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/negro0.png")));
         }
     }
 
+  
+    @Override
     public void run() {
         animationBox();
     }
 
-
+   
+    public void startAnimation() {
+        Thread thread = new Thread(this); 
+        thread.start(); 
+    }
 }
+

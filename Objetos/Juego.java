@@ -225,7 +225,7 @@ public class Juego {
                 this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).getFicha().setColor(ObtenerJugadorActual().getColorDeFicha());
                 Hilo.setBtn(this.ListaBotones[NuevaPosicionFila][NuevaPosicionColumna]);
                 Hilo.setColor(ObtenerJugadorActual().getColorDeFicha());
-                Hilo.start();
+                Hilo.startAnimation();
                 return true;
             } else {
                 this.Tablero.ObtenerCasiila(NuevaPosicionFila, NuevaPosicionColumna).getFicha().setColor(this.InvertirColores(ObtenerJugadorActual().getColorDeFicha()));
