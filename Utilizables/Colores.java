@@ -6,7 +6,7 @@ package Utilizables;
 
 /**
  *
- * @author user
+ * @author Les
  */
 public enum Colores {
      Negro, Rojo, Rosa, Blanco;

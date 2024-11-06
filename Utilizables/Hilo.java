@@ -10,7 +10,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author user
+ * @author Les
  */
 public class Hilo implements Runnable {
     private JButton btn;

@@ -8,7 +8,7 @@ import Utilizables.Colores;
 
 /**
  *
- * @author user
+ * @author Les
  */
 public class Jugador {
     private String Nombre;
