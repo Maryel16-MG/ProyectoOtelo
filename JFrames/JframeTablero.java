@@ -6,6 +6,7 @@ package JFrames;
 
 
 import Objectos.Juego;
+
 import Utilizables.Colores;
 import static Utilizables.Colores.Blanco;
 import static Utilizables.Colores.Rosa;

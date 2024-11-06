@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Objetos;
+package Objectos;
 
+import Objectos.Jugador;
+import Objectos.Tablero;
 import Utilizables.Colores;
 import static Utilizables.Colores.Blanco;
 import static Utilizables.Colores.Negro;
