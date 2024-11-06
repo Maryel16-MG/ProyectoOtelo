@@ -5,7 +5,7 @@
 package JFrames;
 
 
-import Objectos.Juego;
+import Objetos.Juego;
 
 import Utilizables.Colores;
 import static Utilizables.Colores.Blanco;
@@ -19,10 +19,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author 9575
- */
+
 public class JframeTablero extends javax.swing.JFrame {
 
     private Juego juego;
